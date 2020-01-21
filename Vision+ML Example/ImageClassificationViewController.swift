@@ -1,10 +1,3 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-View controller for selecting images and applying Vision + Core ML processing.
-*/
-
 import UIKit
 import CoreML
 import Vision
@@ -27,7 +20,7 @@ class ImageClassificationViewController: UIViewController {
              To use a different Core ML classifier model, add it to the project
              and replace `MobileNet` with that model's generated Swift class.
              */
-            let model = try VNCoreMLModel(for: MobileNet().model)
+            let model = try VNCoreMLModel(for: Resnet50().model)
             
             let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
                 self?.processClassifications(for: request, error: error)
@@ -99,12 +92,12 @@ class ImageClassificationViewController: UIViewController {
         let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
             self.presentPhotoPicker(sourceType: .camera)
         }
-        let choosePhoto = UIAlertAction(title: "Choose Photo", style: .default) { [unowned self] _ in
-            self.presentPhotoPicker(sourceType: .photoLibrary)
-        }
+//        let choosePhoto = UIAlertAction(title: "Choose Photo", style: .default) { [unowned self] _ in
+//            self.presentPhotoPicker(sourceType: .photoLibrary)
+//        }
         
         photoSourcePicker.addAction(takePhoto)
-        photoSourcePicker.addAction(choosePhoto)
+//        photoSourcePicker.addAction(choosePhoto)
         photoSourcePicker.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(photoSourcePicker, animated: true)
