@@ -74,3 +74,4 @@ func processClassifications(for request: VNRequest, error: Error?) {
         let classifications = results as! [VNClassificationObservation]
 ```
 [View in Source](x-source-tag://ProcessClassifications)
+# ObjectDetection
