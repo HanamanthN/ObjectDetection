@@ -71,11 +71,13 @@ class ImageClassificationViewController: UIViewController {
         }
         
         let photoSourcePicker = UIAlertController()
-        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
-            self.presentPhotoPicker(sourceType: .camera)
-        }
+        photoSourcePicker.addAction(UIAlertAction(title: "Take Photo", style: .default))
+        self.presentPhotoPicker(sourceType: .camera)
+//        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
+//            self.presentPhotoPicker(sourceType: .camera)
+//        }
         
-        photoSourcePicker.addAction(takePhoto)
+        //photoSourcePicker.addAction(takePhoto)
         photoSourcePicker.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(photoSourcePicker, animated: true)
