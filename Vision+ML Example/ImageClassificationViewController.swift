@@ -46,16 +46,13 @@ class ImageClassificationViewController: UIViewController {
                 self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
                 return
             }
-            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
             let classifications = results as! [VNClassificationObservation]
         
             if classifications.isEmpty {
                 self.classificationLabel.text = "Nothing recognized."
             } else {
-                // Display top classifications ranked by confidence in the UI.
                 let topClassifications = classifications.prefix(2)
                 let descriptions = topClassifications.map { classification -> String in
-                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
                     if classification.identifier == "crash helmet" {
                         let alert = UIAlertController(title: "WOW Cograts", message: "You searched it..", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -63,7 +60,9 @@ class ImageClassificationViewController: UIViewController {
                     }
                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
-                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+                let colorOfObject = self.imageView.image?.areaAverage().cgColor
+                self.classificationLabel.text = "Color: \(String(describing: colorOfObject?.components))\n" + "Classification:\n" + descriptions.joined(separator: "\n")
+                debugPrint("EEE: \(String(describing: colorOfObject))")
 //                debugPrint("EEE: \(String(describing: self.imageView.image?.areaAverage()))")
             }
         }
@@ -108,34 +107,35 @@ extension ImageClassificationViewController: UIImagePickerControllerDelegate, UI
     }
 }
 
-//extension UIImage {
-//    func areaAverage() -> UIColor {
-//        var bitmap = [UInt8](repeating: 0, count: 4)
-//
-//        if #available(iOS 9.0, *) {
-//            // Get average color.
-//            let context = CIContext()
-//            let inputImage: CIImage = ciImage ?? CoreImage.CIImage(cgImage: cgImage!)
-//            let extent = inputImage.extent
-//            let inputExtent = CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.size.width, w: extent.size.height)
-//            let filter = CIFilter(name: "CIAreaAverage", withInputParameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: inputExtent])!
-//            let outputImage = filter.outputImage!
-//            let outputExtent = outputImage.extent
-//            assert(outputExtent.size.width == 1 && outputExtent.size.height == 1)
-//
-//            // Render to bitmap.
-//            context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: kCIFormatRGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
-//        } else {
-//            // Create 1x1 context that interpolates pixels when drawing to it.
-//            let context = CGContext(data: &bitmap, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
-//            let inputImage = cgImage ?? CIContext().createCGImage(ciImage!, from: ciImage!.extent)
-//
-//            // Render to bitmap.
-//            context.draw(inputImage!, in: CGRect(x: 0, y: 0, width: 1, height: 1))
-//        }
-//
-//        // Compute result.
-//        let result = UIColor(red: CGFloat(bitmap[0]), green: CGFloat(bitmap[1]), blue: CGFloat(bitmap[2]), alpha: CGFloat(bitmap[3]))
-//        return result
-//    }
-//}
+extension UIImage {
+    func areaAverage() -> UIColor {
+        var bitmap = [UInt8](repeating: 0, count: 4)
+
+        if #available(iOS 9.0, *) {
+            // Get average color.
+            let context = CIContext()
+            let inputImage: CIImage = ciImage ?? CoreImage.CIImage(cgImage: cgImage!)
+            let extent = inputImage.extent
+            let inputExtent = CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.size.width, w: extent.size.height)
+            let filter = CIFilter(name: "CIAreaAverage", withInputParameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: inputExtent])!
+            let outputImage = filter.outputImage!
+            let outputExtent = outputImage.extent
+            assert(outputExtent.size.width == 1 && outputExtent.size.height == 1)
+
+            // Render to bitmap.
+            context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: kCIFormatRGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
+        } else {
+            // Create 1x1 context that interpolates pixels when drawing to it.
+            let context = CGContext(data: &bitmap, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+            let inputImage = cgImage ?? CIContext().createCGImage(ciImage!, from: ciImage!.extent)
+
+            // Render to bitmap.
+            context.draw(inputImage!, in: CGRect(x: 0, y: 0, width: 1, height: 1))
+        }
+
+        // Compute result.
+        let result = UIColor(red: CGFloat(bitmap[0]), green: CGFloat(bitmap[1]), blue: CGFloat(bitmap[2]), alpha: CGFloat(bitmap[3]))
+        return result
+    }
+}
+
