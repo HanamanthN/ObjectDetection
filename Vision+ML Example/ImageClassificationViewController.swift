@@ -54,8 +54,13 @@ class ImageClassificationViewController: UIViewController {
             } else {
                 // Display top classifications ranked by confidence in the UI.
                 let topClassifications = classifications.prefix(2)
-                let descriptions = topClassifications.map { classification in
+                let descriptions = topClassifications.map { classification -> String in
                     // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
+                    if classification.identifier == "crash helmet" {
+                        let alert = UIAlertController(title: "WOW Cograts", message: "You searched it..", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
                 self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
