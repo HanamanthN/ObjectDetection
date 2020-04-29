@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,29 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3v-RD-7h8">
-                                <rect key="frame" x="0.0" y="28.000000000000004" width="414" height="32.333333333333343"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find helmet in your home?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgb-hd-vZQ">
-                                        <rect key="frame" x="8" y="0.0" width="398" height="32.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Vgb-hd-vZQ" secondAttribute="trailing" constant="8" id="7ep-WV-ksR"/>
-                                    <constraint firstItem="Vgb-hd-vZQ" firstAttribute="top" secondItem="c3v-RD-7h8" secondAttribute="top" id="LZr-vr-63M"/>
-                                    <constraint firstItem="Vgb-hd-vZQ" firstAttribute="leading" secondItem="c3v-RD-7h8" secondAttribute="leading" constant="8" id="LZu-x9-xZ0"/>
-                                    <constraint firstAttribute="bottom" secondItem="Vgb-hd-vZQ" secondAttribute="bottom" id="hsw-YU-mqD"/>
-                                </constraints>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-rf-AXs">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f06-Zb-U4b">
-                                <rect key="frame" x="0.0" y="636.66666666666663" width="414" height="99.333333333333371"/>
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="camera" id="wDM-ZZ-cal">
                                         <connections>
@@ -51,7 +31,7 @@
                                 </items>
                             </toolbar>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJ5-fY-hgK">
-                                <rect key="frame" x="20" y="560.33333333333337" width="137.66666666666666" height="60.333333333333371"/>
+                                <rect key="frame" x="20" y="615.66666666666663" width="137.66666666666666" height="60.333333333333371"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XLf-id-yz4">
                                     <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="60.333333333333371"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,18 +60,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="c3v-RD-7h8" firstAttribute="leading" secondItem="Gj5-Ut-Web" secondAttribute="leading" id="0Cf-Ge-9fy"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3G0-yM-dzu"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="leading" secondItem="f06-Zb-U4b" secondAttribute="leading" id="3L7-XZ-DmR"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="AJE-Qi-8w8"/>
-                            <constraint firstItem="TJ5-fY-hgK" firstAttribute="top" secondItem="c3v-RD-7h8" secondAttribute="bottom" constant="500" id="AqA-bb-cGm"/>
                             <constraint firstItem="TJ5-fY-hgK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="C3C-Lr-WIN"/>
                             <constraint firstAttribute="trailing" secondItem="ikj-rf-AXs" secondAttribute="trailing" id="FWZ-Ms-fbs"/>
-                            <constraint firstItem="c3v-RD-7h8" firstAttribute="top" secondItem="Gj5-Ut-Web" secondAttribute="top" constant="8" id="KIL-1R-ZFR"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="bottom" secondItem="f06-Zb-U4b" secondAttribute="bottom" id="LQz-qw-FTB"/>
                             <constraint firstItem="f06-Zb-U4b" firstAttribute="top" secondItem="TJ5-fY-hgK" secondAttribute="bottom" constant="16" id="N1o-WE-6Ao"/>
                             <constraint firstItem="Gj5-Ut-Web" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TJ5-fY-hgK" secondAttribute="trailing" constant="16" id="XxC-Sv-6lb"/>
-                            <constraint firstItem="c3v-RD-7h8" firstAttribute="trailing" secondItem="Gj5-Ut-Web" secondAttribute="trailing" id="caN-jV-m7x"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="f8c-T6-koD"/>
                             <constraint firstItem="ikj-rf-AXs" firstAttribute="trailing" secondItem="f06-Zb-U4b" secondAttribute="trailing" id="qmE-r8-400"/>
                         </constraints>
@@ -101,6 +77,7 @@
                         <outlet property="cameraButton" destination="wDM-ZZ-cal" id="dfL-T0-Rh1"/>
                         <outlet property="classificationLabel" destination="zmt-pk-Cvs" id="YGh-Hq-ubS"/>
                         <outlet property="imageView" destination="ikj-rf-AXs" id="MjC-cW-qE8"/>
+                        <outlet property="resultView" destination="XLf-id-yz4" id="W6T-Tf-HEv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

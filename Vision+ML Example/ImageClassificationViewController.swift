@@ -8,6 +8,16 @@ class ImageClassificationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var classificationLabel: UILabel!
+    @IBOutlet weak var resultView: UIView!
+    
+    
+    var objectConfidence: String = ""
+    var rgbaArray = [CGFloat]()
+    
+    var red: CGFloat = 0.0
+    var green: CGFloat = 0.0
+    var blue: CGFloat = 0.0
+    var alpha: CGFloat = 0.0
     
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
@@ -53,16 +63,28 @@ class ImageClassificationViewController: UIViewController {
             } else {
                 let topClassifications = classifications.prefix(2)
                 let descriptions = topClassifications.map { classification -> String in
-                    if classification.identifier == "crash helmet" {
-                        let alert = UIAlertController(title: "WOW Cograts", message: "You searched it..", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
+                    self.objectConfidence = classification.identifier
                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
                 let colorOfObject = self.imageView.image?.areaAverage().cgColor
-                self.classificationLabel.text = "Color: \(String(describing: colorOfObject?.components))\n" + "Classification:\n" + descriptions.joined(separator: "\n")
+                
+                self.rgbaArray = (colorOfObject?.components!)!
+                
+                debugPrint("EEE: array count \(self.rgbaArray)")
+                
+                self.red = self.rgbaArray[0]
+                self.green = self.rgbaArray[1]
+                self.blue = self.rgbaArray[2]
+                self.alpha = self.rgbaArray[3]
+                
+                
+                self.resultView.backgroundColor = UIColor(red: self.red, green: self.green, blue: self.blue, alpha: self.alpha)
+                
+                self.classificationLabel.text = "Color: \(String(describing: colorOfObject?.components!))\n" + "Classification:\n" + descriptions.joined(separator: "\n")
+                
                 debugPrint("EEE: \(String(describing: colorOfObject))")
+                debugPrint("EEE: \(String(describing: descriptions.first))")
+                debugPrint("EEE: \(self.objectConfidence)")
 //                debugPrint("EEE: \(String(describing: self.imageView.image?.areaAverage()))")
             }
         }
@@ -134,7 +156,7 @@ extension UIImage {
         }
 
         // Compute result.
-        let result = UIColor(red: CGFloat(bitmap[0]), green: CGFloat(bitmap[1]), blue: CGFloat(bitmap[2]), alpha: CGFloat(bitmap[3]))
+        let result = UIColor(red: CGFloat(bitmap[0])/255, green: CGFloat(bitmap[1])/255, blue: CGFloat(bitmap[2])/255, alpha: CGFloat(bitmap[3])/255)
         return result
     }
 }
